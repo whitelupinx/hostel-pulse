@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hostel Pulse — Sign in / Register</title>
+<meta name="description" content="Sign in or register on Hostel Pulse, the AI-assisted hostel complaint desk.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="page">
+
+  <!-- ============ VISUAL PANEL ============ -->
+  <section class="panel-visual" aria-hidden="true">
+    <div class="visual-glow"></div>
+
+    <div class="building">
+      <div class="logo">
+        <img src="logio.svg" class="logo" width="300" height="300">
+      </div>
+
+      <div class="base"><span class="base-door"></span></div>
+    </div>
+
+    <div class="stat-chip stat-chip--one">
+      <span class="stat-chip__value" id="stat-one-value">2 hour</span>
+      <span class="stat-chip__label" id="stat-one-label">avg. response</span>
+    </div>
+
+    <div class="stat-chip stat-chip--two">
+      <span class="stat-chip__value" id="stat-two-value">0</span>
+      <span class="stat-chip__label" id="stat-two-label">complaints closed this week</span>
+    </div>
+
+    <div class="visual-copy">
+      <p class="eyebrow">Hostel Pulse · Night Desk</p>
+      <h2 id="visual-heading">Every complaint,<br>heard by morning.</h2>
+      <p class="visual-sub" id="visual-sub">Raise it from your room. The AI triages the issue, finds the right warden, and keeps you posted — no front-desk queue required.</p>
+    </div>
+  </section>
+
+  <!-- ============ FORM PANEL ============ -->
+  <section class="panel-form">
+    <div class="form-card">
+
+      <div class="brand">
+        <span class="brand-mark">HP</span>
+        <span class="brand-name">Hostel&nbsp;Pulse</span>
+      </div>
+
+      <!-- Sign in / Register switch -->
+      <div class="auth-toggle" role="tablist" aria-label="Choose sign in or register">
+        <button type="button" id="tab-signin" class="is-active" role="tab" aria-selected="true" aria-controls="panel-signin">Sign in</button>
+        <button type="button" id="tab-register" role="tab" aria-selected="false" aria-controls="panel-register">Register</button>
+      </div>
+
+      <h1 id="form-heading">Welcome back</h1>
+      <p class="form-sub" id="form-sub">Sign in to report something new, or follow a ticket that's already in motion.</p>
+
+      <div class="role-switch" role="radiogroup" aria-label="Account type">
+        <input type="radio" name="role" id="role-student" checked>
+        <label for="role-student">Student</label>
+
+        <input type="radio" name="role" id="role-warden">
+        <label for="role-warden">Warden</label>
+
+        <input type="radio" name="role" id="role-admin">
+        <label for="role-admin">Admin</label>
+      </div>
+
+      <!-- ---- SIGN IN PANEL ---- -->
+      <div class="auth-panel is-active" id="panel-signin">
+        <form class="login-form" action="#" method="post">
+          <div class="field">
+            <label for="identifier">Roll number or email</label>
+            <input type="text" id="identifier" name="identifier" placeholder="22CS1147 or you@hostel.edu" autocomplete="username">
+          </div>
+
+          <div class="field">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" autocomplete="current-password">
+          </div>
+
+          <div class="field-row">
+            <label class="checkbox">
+              <input type="checkbox" id="remember" name="remember">
+              <span>Keep me signed in</span>
+            </label>
+            <a href="#" class="link-muted">Forgot password?</a>
+          </div>
+
+          <button type="submit" id="loginBtn" class="btn-primary">Sign in</button>
+        </form>
+
+        <div class="divider"><span>or</span></div>
+
+        <p class="signup-line">New this term? <a href="#" id="link-to-register">Register your room</a></p>
+      </div>
+
+      <!-- ---- REGISTER PANEL ---- -->
+      <div class="auth-panel" id="panel-register">
+        <form class="login-form" action="#" method="post">
+          <div class="field">
+            <label for="full-name">Full name</label>
+            <input type="text" id="full-name" name="full-name" placeholder="e.g. Aditi Sharma" autocomplete="name">
+          </div>
+
+          <div class="field">
+            <label for="email">School email</label>
+            <input type="email" id="email" name="email" placeholder="you@hostel.edu" autocomplete="email">
+          </div>
+
+          <div class="field-pair">
+            <div class="field">
+              <label for="hostel-no">Hostel</label>
+              <input type="text" id="hostel-no" name="hostel-no" placeholder="e.g. Hostel 4 / Block B" autocomplete="off">
+            </div>
+
+            <div class="field">
+              <label for="room-no">Room no.</label>
+              <input type="text" id="room-no" name="room-no" placeholder="e.g. 214" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210" autocomplete="tel">
+          </div>
+
+          <div class="field">
+            <label for="reg-password">Password</label>
+            <input type="password" id="reg-password" name="reg-password" placeholder="••••••••" autocomplete="new-password">
+          </div>
+
+          <div class="field">
+            <label for="confirm-password">Confirm password</label>
+            <input type="password" id="confirm-password" name="confirm-password" placeholder="••••••••" autocomplete="new-password">
+          </div>
+
+          <div class="field-row">
+            <label class="checkbox">
+              <input type="checkbox" id="terms" name="terms">
+              <span>I agree to the hostel's usage policy</span>
+            </label>
+          </div>
+
+          <button type="submit" id="signupBtn" class="btn-primary">Create account</button>
+        </form>
+
+        <div class="divider"><span>or</span></div>
+
+        <p class="signup-line">Already registered? <a href="#" id="link-to-signin">Sign in instead</a></p>
+      </div>
+
+      <p class="ai-note"><span class="ai-dot" aria-hidden="true"></span><span id="ai-note-text">AI triage is on duty tonight — new reports reach a warden within minutes.</span></p>
+
+    </div>
+  </section>
+
+</div>
+
+<script>
+(function () {
+  var tabSignin = document.getElementById('tab-signin');
+  var tabRegister = document.getElementById('tab-register');
+  var panelSignin = document.getElementById('panel-signin');
+  var panelRegister = document.getElementById('panel-register');
+
+  var linkToRegister = document.getElementById('link-to-register');
+  var linkToSignin = document.getElementById('link-to-signin');
+
+  var formHeading = document.getElementById('form-heading');
+  var formSub = document.getElementById('form-sub');
+  var visualHeading = document.getElementById('visual-heading');
+  var visualSub = document.getElementById('visual-sub');
+  var statOneValue = document.getElementById('stat-one-value');
+  var statOneLabel = document.getElementById('stat-one-label');
+  var statTwoValue = document.getElementById('stat-two-value');
+  var statTwoLabel = document.getElementById('stat-two-label');
+  var aiNoteText = document.getElementById('ai-note-text');
+
+  var subBtn = document.getElementById('loginBtn');
+
+  var copy = {
+    signin: {
+      heading: 'Welcome back',
+      sub: "Sign in to report something new, or follow a ticket that's already in motion.",
+      visualHeading: 'Every complaint,<br>heard by morning.',
+      visualSub: 'Raise it from your room. The AI triages the issue, finds the right warden, and keeps you posted — no front-desk queue required.',
+      statOneValue: '2 hour',
+      statOneLabel: 'avg. response',
+      statTwoValue: '0',
+      statTwoLabel: 'complaints closed this week',
+      aiNote: 'AI triage is on duty tonight — new reports reach a warden within minutes.'
+    },
+    register: {
+      heading: 'Create your account',
+      sub: 'Register your room once — after that, reporting an issue takes seconds.',
+      visualHeading: 'One room,<br>one profile, done.',
+      visualSub: "Link your room to your school email so every complaint you raise reaches the right warden automatically — no re-explaining your block and floor each time.",
+      statOneValue: '1,200+',
+      statOneLabel: 'rooms already on Pulse',
+      statTwoValue: '&lt; 5 min',
+      statTwoLabel: 'to get set up',
+      aiNote: 'Your room details let the AI route future complaints to the right warden instantly.'
+    }
+  };
+
+  function showRegister() {
+    tabRegister.classList.add('is-active');
+    tabSignin.classList.remove('is-active');
+    tabRegister.setAttribute('aria-selected', 'true');
+    tabSignin.setAttribute('aria-selected', 'false');
+
+    panelRegister.classList.add('is-active');
+    panelSignin.classList.remove('is-active');
+
+    applyCopy(copy.register);
+  }
+
+  function showSignin() {
+    tabSignin.classList.add('is-active');
+    tabRegister.classList.remove('is-active');
+    tabSignin.setAttribute('aria-selected', 'true');
+    tabRegister.setAttribute('aria-selected', 'false');
+
+    panelSignin.classList.add('is-active');
+    panelRegister.classList.remove('is-active');
+
+    applyCopy(copy.signin);
+  }
+
+  function applyCopy(c) {
+    formHeading.textContent = c.heading;
+    formSub.textContent = c.sub;
+    visualHeading.innerHTML = c.visualHeading;
+    visualSub.textContent = c.visualSub;
+    statOneValue.textContent = c.statOneValue;
+    statOneLabel.textContent = c.statOneLabel;
+    statTwoValue.innerHTML = c.statTwoValue;
+    statTwoLabel.textContent = c.statTwoLabel;
+    aiNoteText.textContent = c.aiNote;
+  }
+
+  tabSignin.addEventListener('click', showSignin);
+  tabRegister.addEventListener('click', showRegister);
+  subBtn.addEventListener('click', () => {
+    event.preventDefault();
+    window.location.href = './dashboard.html';
+  });
+
+  linkToRegister.addEventListener('click', function (e) { e.preventDefault(); showRegister(); });
+  linkToSignin.addEventListener('click', function (e) { e.preventDefault(); showSignin(); });
+})();
+</script>
+
+</body>
+</html>

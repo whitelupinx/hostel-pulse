@@ -1,0 +1,593 @@
+/* =========================================================
+   Hostel Pulse — Sign in
+   Token system
+   ========================================================= */
+
+:root{
+  /* -- night / visual panel -- */
+  --ink-navy:     #10142A;
+  --midnight:     #1A2142;
+  --midnight-soft:#232B52;
+  --slate-dim:    #3A4270;
+  --slate:        #8A93B8;
+  --amber:        #F2A559;
+  --amber-deep:   #E8935B;
+  --teal:         #5FD9C4;
+  --cloud:        #F4F2EC;
+
+  /* -- day / form panel -- */
+  --paper:        #F4F6FB;
+  --paper-line:   #E1E5F0;
+  --card:         #FFFFFF;
+  --ink:          #161B33;
+  --ink-muted:    #5B6280;
+  --ink-faint:    #9BA1BE;
+
+  /* -- type -- */
+  --font-display: 'Space Grotesk', 'Segoe UI', sans-serif;
+  --font-body:    'Inter', 'Segoe UI', sans-serif;
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;
+
+  --radius-lg: 20px;
+  --radius-md: 12px;
+  --radius-sm: 8px;
+}
+
+*, *::before, *::after{ box-sizing: border-box; }
+
+html, body{
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+body{
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2{
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+p{ margin: 0; }
+
+a{ color: inherit; }
+
+button{ font-family: inherit; }
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+label:focus-within{
+  outline: 2px solid var(--teal);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   Page shell
+   ========================================================= */
+
+.page{
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  min-height: 100vh;
+}
+
+/* =========================================================
+   Visual panel (night building)
+   ========================================================= */
+
+.panel-visual{
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 56px 48px 44px;
+  background:
+    radial-gradient(circle at 78% 8%, rgba(242,165,89,0.16), transparent 45%),
+    linear-gradient(180deg, var(--ink-navy) 0%, var(--midnight) 62%, #0C0F22 100%);
+}
+
+.visual-glow{
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 60%;
+  background: radial-gradient(ellipse at top, rgba(95,217,196,0.10), transparent 60%);
+  pointer-events: none;
+}
+
+.building{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 14% 0 28px;
+}
+
+.beacon{
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--teal);
+  margin-bottom: 10px;
+  box-shadow: 0 0 0 0 rgba(95,217,196,0.55);
+  animation: beacon-pulse 2.6s ease-out infinite;
+}
+
+.beacon-core{
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--teal);
+}
+
+@keyframes beacon-pulse{
+  0%   { box-shadow: 0 0 0 0 rgba(95,217,196,0.55); }
+  70%  { box-shadow: 0 0 0 16px rgba(95,217,196,0); }
+  100% { box-shadow: 0 0 0 0 rgba(95,217,196,0); }
+}
+
+.roof{
+  width: 300px;
+  height: 26px;
+  background: var(--midnight-soft);
+  clip-path: polygon(8% 100%, 50% 0%, 92% 100%);
+  margin-bottom: -2px;
+}
+
+.window-grid{
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  width: 336px;
+  padding: 18px 16px;
+  background: linear-gradient(180deg, var(--midnight-soft), #1D2447);
+  border: 1px solid rgba(244,242,236,0.06);
+  border-radius: 4px;
+}
+
+.logo { 
+  /* This rounds the corners */
+  border-radius: 200px; 
+}
+
+.win{
+  aspect-ratio: 1 / 1.15;
+  border-radius: 3px;
+}
+
+.win--dim{
+  background: var(--slate-dim);
+  opacity: 0.55;
+}
+
+.win--lit{
+  background: linear-gradient(160deg, var(--amber), var(--amber-deep));
+  box-shadow: 0 0 10px rgba(242,165,89,0.55);
+}
+
+.win--ai{
+  background: var(--teal);
+  box-shadow: 0 0 10px rgba(95,217,196,0.6);
+  animation: window-pulse 3.2s ease-in-out infinite;
+}
+
+@keyframes window-pulse{
+  0%, 100% { opacity: 1; }
+  50%      { opacity: 0.45; }
+}
+
+.base{
+  width: 336px;
+  height: 30px;
+  background: var(--midnight-soft);
+  border-radius: 0 0 6px 6px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.base-door{
+  width: 46px;
+  height: 22px;
+  border-radius: 6px 6px 0 0;
+  background: radial-gradient(ellipse at center top, rgba(242,165,89,0.65), rgba(242,165,89,0.05));
+}
+
+.stat-chip{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  background: rgba(244,242,236,0.06);
+  border: 1px solid rgba(244,242,236,0.12);
+  backdrop-filter: blur(10px);
+  max-width: 190px;
+}
+
+.stat-chip--one{ top: 78px; right: 44px; }
+.stat-chip--two{ bottom: 168px; left: 40px; }
+
+.stat-chip__value{
+  font-family: var(--font-mono);
+  font-size: 1.05rem;
+  color: var(--amber);
+}
+
+.stat-chip__label{
+  font-size: 0.72rem;
+  color: var(--slate);
+  line-height: 1.3;
+}
+
+.visual-copy{
+  position: relative;
+  max-width: 420px;
+  text-align: center;
+  color: var(--cloud);
+}
+
+.logo { 
+  /* This rounds the corners */
+  border-radius: 200px; 
+}
+
+.eyebrow{
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 14px;
+}
+
+.visual-copy h2{
+  font-size: 1.9rem;
+  line-height: 1.2;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.visual-sub{
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--slate);
+}
+
+/* =========================================================
+   Form panel (day desk)
+   ========================================================= */
+
+.panel-form{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 32px;
+}
+
+.form-card{
+  width: 100%;
+  max-width: 400px;
+  background: var(--card);
+  border: 1px solid var(--paper-line);
+  border-radius: var(--radius-lg);
+  padding: 40px 36px;
+  box-shadow: 0 24px 48px -28px rgba(22,27,51,0.25);
+}
+
+.brand{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.brand-mark{
+  width: 34px;
+  height: 34px;
+  border-radius: 9px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.8rem;
+  color: var(--ink-navy);
+  background: linear-gradient(135deg, var(--amber), var(--teal));
+}
+
+.brand-name{
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: var(--ink);
+}
+
+.form-card h1{
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.form-sub{
+  font-size: 0.92rem;
+  color: var(--ink-muted);
+  line-height: 1.5;
+  margin-bottom: 26px;
+}
+
+/* -- role switch -- */
+
+.role-switch{
+  display: flex;
+  background: var(--paper);
+  border: 1px solid var(--paper-line);
+  border-radius: 999px;
+  padding: 4px;
+  margin-bottom: 26px;
+}
+
+.role-switch input{
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.role-switch label{
+  flex: 1;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink-muted);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.18s ease, color 0.18s ease;
+}
+
+.role-switch input:checked + label{
+  background: var(--ink-navy);
+  color: var(--cloud);
+}
+
+/* -- form fields -- */
+
+.login-form{
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.field{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.field label{
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.field input{
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--paper-line);
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.field input::placeholder{
+  color: var(--ink-faint);
+}
+
+.field input:focus{
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(95,217,196,0.18);
+  background: var(--card);
+}
+
+.field-row{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: -4px;
+}
+
+.checkbox{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  cursor: pointer;
+}
+
+.checkbox input{
+  width: 15px;
+  height: 15px;
+  accent-color: var(--ink-navy);
+}
+
+.link-muted{
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  text-decoration: underline;
+  text-decoration-color: var(--paper-line);
+  text-underline-offset: 3px;
+}
+
+.link-muted:hover{
+  color: var(--ink);
+}
+
+.btn-primary{
+  margin-top: 6px;
+  padding: 13px 0;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-navy);
+  background: linear-gradient(135deg, var(--amber), var(--amber-deep));
+  box-shadow: 0 12px 24px -12px rgba(242,165,89,0.7);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-primary:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 16px 28px -12px rgba(242,165,89,0.8);
+}
+
+/* -- divider / signup / ai note -- */
+
+.divider{
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px 0 18px;
+  color: var(--ink-faint);
+  font-size: 0.78rem;
+}
+
+.divider::before,
+.divider::after{
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--paper-line);
+}
+
+.signup-line{
+  text-align: center;
+  font-size: 0.86rem;
+  color: var(--ink-muted);
+  margin-bottom: 22px;
+}
+
+.signup-line a{
+  color: var(--ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: var(--paper-line);
+  text-underline-offset: 3px;
+}
+
+.ai-note{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  line-height: 1.4;
+  color: var(--ink-muted);
+  padding-top: 18px;
+  border-top: 1px dashed var(--paper-line);
+}
+
+.ai-dot{
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 0 0 rgba(95,217,196,0.55);
+  animation: beacon-pulse 2.6s ease-out infinite;
+}
+
+/* =========================================================
+   Responsive
+   ========================================================= */
+
+@media (max-width: 980px){
+  .page{ grid-template-columns: 1fr; }
+  .panel-visual{ display: none; }
+  .panel-form{ padding: 40px 20px; min-height: 100vh; }
+}
+
+@media (max-width: 420px){
+  .form-card{ padding: 30px 22px; }
+}
+
+/* =========================================================
+   Motion preference
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce){
+  .beacon,
+  .ai-dot,
+  .win--ai{
+    animation: none;
+  }
+}
+
+/* =========================================================
+   Auth mode toggle (Sign in / Register)
+   ========================================================= */
+
+.auth-toggle{
+  display: flex;
+  gap: 22px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--paper-line);
+}
+
+.auth-toggle button{
+  appearance: none;
+  background: none;
+  border: none;
+  padding: 0 0 12px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--ink-faint);
+  cursor: pointer;
+  position: relative;
+  top: 1px;
+  border-bottom: 2px solid transparent;
+  transition: color 0.18s ease, border-color 0.18s ease;
+}
+
+.auth-toggle button:hover{
+  color: var(--ink-muted);
+}
+
+.auth-toggle button.is-active{
+  color: var(--ink);
+  border-bottom-color: var(--amber);
+}
+
+/* -- two-up field row (hostel / room, etc.) -- */
+
+.field-pair{
+  display: flex;
+  gap: 14px;
+}
+
+.field-pair .field{
+  flex: 1;
+  min-width: 0;
+}
+
+/* -- show/hide the two auth forms -- */
+
+.auth-panel{
+  display: none;
+}
+
+.auth-panel.is-active{
+  display: block;
+}

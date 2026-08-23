@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hostel Pulse — Dashboard</title>
+<meta name="description" content="Student dashboard for Hostel Pulse — track complaints, raise new ones, and view the hostel scoreboard.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="dashcss.css">
+</head>
+<body>
+
+<div class="dash-page">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark">HP</span>
+      <span class="brand-name">Hostel&nbsp;Pulse</span>
+    </div>
+
+    <nav class="sidebar__nav" aria-label="Dashboard sections">
+      <a class="sidebar__link is-current" href="#overview"><span class="sidebar__icon"></span>Overview</a>
+      <a class="sidebar__link" href="#raise"><span class="sidebar__icon"></span>Raise a Complaint</a>
+      <a class="sidebar__link" href="#track"><span class="sidebar__icon"></span>Track Complaints</a>
+      <a class="sidebar__link" href="#scoreboard"><span class="sidebar__icon"></span>Hostel Scoreboard</a>
+      <a class="sidebar__link" href="#profile"><span class="sidebar__icon"></span>Profile</a>
+    </nav>
+
+    <div class="sidebar__foot">
+      <div class="sidebar__student">
+        <span class="avatar avatar--sm">AS</span>
+        <div class="sidebar__student-info">
+          <span class="sidebar__student-name">Aditi Sharma</span>
+          <span class="sidebar__student-meta">Hostel 4 · Room 214</span>
+        </div>
+      </div>
+      <a href="index.html" class="sidebar__signout">Sign out</a>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <main class="dash-main" id="overview">
+
+    <div class="dash-topbar">
+      <div>
+        <h1>Welcome back, Aditi</h1>
+        <p class="dash-topbar__sub">Here's what's happening with your room and hostel today.</p>
+      </div>
+      <div class="dash-topbar__right">
+        <span class="pill-status"><span class="ai-dot" aria-hidden="true"></span>AI triage active</span>
+        <span class="avatar avatar--md">AS</span>
+      </div>
+    </div>
+
+    <!-- ---- STATS ---- -->
+    <section class="dash-section">
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-card__value">2</div>
+          <div class="stat-card__label">Open complaints</div>
+        </div>
+        <div class="stat-card stat-card--teal">
+          <div class="stat-card__value">1</div>
+          <div class="stat-card__label">In progress</div>
+        </div>
+        <div class="stat-card stat-card--navy">
+          <div class="stat-card__value">2 hr</div>
+          <div class="stat-card__label">Avg. response time</div>
+        </div>
+        <div class="stat-card stat-card--slate">
+          <div class="stat-card__value">#3</div>
+          <div class="stat-card__label">Hostel 4 rank</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="dash-grid">
+
+      <!-- ---- RAISE A COMPLAINT ---- -->
+      <section class="dash-section" id="raise">
+        <div class="dash-section__head">
+          <h2>Raise a Complaint</h2>
+        </div>
+        <div class="card">
+
+          <!-- Manual / AI Photo switch -->
+          <div class="method-toggle" role="tablist" aria-label="Complaint filing method">
+            <button type="button" id="method-tab-manual" class="is-active" role="tab" aria-selected="true" aria-controls="method-manual">Manual</button>
+            <button type="button" id="method-tab-ai" role="tab" aria-selected="false" aria-controls="method-ai">
+              <svg class="sparkle" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2zM19 14l.9 2.6L22.5 17.5l-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9L19 14zM5 15l.7 2 2 .7-2 .7-.7 2-.7-2-2-.7 2-.7L5 15z"/></svg>
+              AI Photo
+            </button>
+          </div>
+
+          <!-- ---- MANUAL FORM ---- -->
+          <div class="method-panel is-active" id="method-manual">
+            <form class="quick-form" action="#" method="post">
+              <div class="field">
+                <label for="category">Category</label>
+                <select id="category" name="category">
+                  <option value="">Select a category</option>
+                  <option value="electrical">Electrical</option>
+                  <option value="plumbing">Plumbing</option>
+                  <option value="wifi">Wi‑Fi / Internet</option>
+                  <option value="cleanliness">Cleanliness</option>
+                  <option value="furniture">Furniture</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="description">Description</label>
+                <textarea id="description" name="description" rows="4" placeholder="Describe the issue — what, where, since when."></textarea>
+              </div>
+
+              <div class="field">
+                <label>Urgency</label>
+                <div class="urgency-set" role="radiogroup" aria-label="Urgency">
+                  <input type="radio" name="urgency" id="urgency-low" checked>
+                  <label for="urgency-low">Low</label>
+
+                  <input type="radio" name="urgency" id="urgency-med">
+                  <label for="urgency-med">Medium</label>
+
+                  <input type="radio" name="urgency" id="urgency-high">
+                  <label for="urgency-high">High</label>
+                </div>
+              </div>
+
+              <button type="submit" class="btn-primary">Submit complaint</button>
+            </form>
+          </div>
+
+          <!-- ---- AI PHOTO FLOW ---- -->
+          <div class="method-panel" id="method-ai">
+            <form class="ai-fields" id="ai-form" action="#" method="post">
+
+              <!-- upload zone (shown until a photo is chosen) -->
+              <label class="upload-zone" id="upload-zone" for="photo-input">
+                <span class="upload-zone__icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M12 4l-4 4M12 4l4 4"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>
+                </span>
+                <span class="upload-zone__title">Upload a photo of the issue</span>
+                <span class="upload-zone__hint">Click to browse or drag a JPG/PNG here — up to 10MB</span>
+                <input type="file" id="photo-input" name="photo" accept="image/*">
+              </label>
+
+              <!-- preview (shown after a photo is chosen) -->
+              <div class="photo-preview" id="photo-preview" style="display:none;">
+                <img id="photo-preview-img" src="" alt="">
+                <div class="photo-preview__info">
+                  <div class="photo-preview__name" id="photo-preview-name"></div>
+                  <div class="photo-preview__size" id="photo-preview-size"></div>
+                </div>
+                <button type="button" class="photo-preview__remove" id="photo-remove">Remove</button>
+              </div>
+
+              <button type="button" class="btn-secondary" id="analyze-btn" style="display:none;">Analyze photo</button>
+
+              <!-- scanning state -->
+              <div class="ai-scan-status" id="scan-status" style="display:none;">
+                <span class="ai-dot" aria-hidden="true"></span>
+                <span id="scan-status-text">Analyzing photo…</span>
+              </div>
+
+              <!-- detection result + editable fields (hidden until analyzed) -->
+              <div id="detection-result" style="display:none;">
+                <div class="detection-banner" style="margin-bottom:16px;">
+                  <span class="detection-banner__dot" aria-hidden="true"></span>
+                  <span class="detection-banner__text">
+                    <strong id="detected-title">—</strong> detected
+                    <span class="confidence-badge" id="detected-confidence">— % match</span><br>
+                    Review the details below before submitting — AI suggestions may not always be accurate.
+                  </span>
+                </div>
+
+                <div class="field">
+                  <label for="ai-category">Category</label>
+                  <select id="ai-category" name="ai-category">
+                    <option value="electrical">Electrical</option>
+                    <option value="plumbing">Plumbing</option>
+                    <option value="wifi">Wi‑Fi / Internet</option>
+                    <option value="cleanliness">Cleanliness</option>
+                    <option value="furniture">Furniture</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+
+                <div class="field">
+                  <label for="ai-description">Description</label>
+                  <textarea id="ai-description" name="ai-description" rows="4"></textarea>
+                  <span class="field-hint">Auto-filled from the photo — edit as needed.</span>
+                </div>
+
+                <div class="field">
+                  <label>Urgency</label>
+                  <div class="urgency-set" role="radiogroup" aria-label="Urgency (AI)">
+                    <input type="radio" name="ai-urgency" id="ai-urgency-low">
+                    <label for="ai-urgency-low">Low</label>
+
+                    <input type="radio" name="ai-urgency" id="ai-urgency-med">
+                    <label for="ai-urgency-med">Medium</label>
+
+                    <input type="radio" name="ai-urgency" id="ai-urgency-high">
+                    <label for="ai-urgency-high">High</label>
+                  </div>
+                </div>
+
+                <button type="submit" class="btn-primary">Submit complaint</button>
+              </div>
+            </form>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ---- TRACK COMPLAINTS ---- -->
+      <section class="dash-section" id="track">
+        <div class="dash-section__head">
+          <h2>Track Complaints</h2>
+          <span class="dash-section__note">3 total</span>
+        </div>
+        <div class="card">
+          <div class="complaint-list">
+
+            <div class="complaint-row">
+              <span class="complaint-row__id">#1042</span>
+              <div class="complaint-row__body">
+                <div class="complaint-row__title">Flickering tube light — Room 214</div>
+                <div class="complaint-row__meta">Electrical · Raised 2 days ago</div>
+              </div>
+              <span class="status-badge status-badge--progress">In Progress</span>
+            </div>
+
+            <div class="complaint-row">
+              <span class="complaint-row__id">#1038</span>
+              <div class="complaint-row__body">
+                <div class="complaint-row__title">Wi‑Fi drops every evening on 2nd floor</div>
+                <div class="complaint-row__meta">Wi‑Fi / Internet · Raised 4 days ago</div>
+              </div>
+              <span class="status-badge status-badge--open">Open</span>
+            </div>
+
+            <div class="complaint-row">
+              <span class="complaint-row__id">#1021</span>
+              <div class="complaint-row__body">
+                <div class="complaint-row__title">Leaking tap in common washroom</div>
+                <div class="complaint-row__meta">Plumbing · Resolved 6 days ago</div>
+              </div>
+              <span class="status-badge status-badge--resolved">Resolved</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- ---- SCOREBOARD ---- -->
+    <section class="dash-section" id="scoreboard">
+      <div class="dash-section__head">
+        <h2>Hostel Scoreboard</h2>
+        <span class="dash-section__note">Based on response time &amp; resolution rate this month</span>
+      </div>
+      <div class="card">
+        <table class="scoreboard">
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Hostel</th>
+              <th>Score</th>
+              <th>Trend</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="rank-cell"><span class="rank-medal rank-medal--1">1</span></span></td>
+              <td><div class="hostel-name">Hostel 2</div></td>
+              <td>94</td>
+              <td><span class="trend trend--up">▲ 3</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-cell"><span class="rank-medal rank-medal--2">2</span></span></td>
+              <td><div class="hostel-name">Hostel 7</div></td>
+              <td>89</td>
+              <td><span class="trend trend--flat">— 0</span></td>
+            </tr>
+            <tr class="is-you">
+              <td><span class="rank-cell"><span class="rank-medal rank-medal--3">3</span></span></td>
+              <td>
+                <div class="hostel-name">Hostel 4<span class="hostel-name__you">Your hostel</span></div>
+              </td>
+              <td>85</td>
+              <td><span class="trend trend--up">▲ 1</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-cell">4</span></td>
+              <td><div class="hostel-name">Hostel 1</div></td>
+              <td>81</td>
+              <td><span class="trend trend--down">▼ 2</span></td>
+            </tr>
+            <tr>
+              <td><span class="rank-cell">5</span></td>
+              <td><div class="hostel-name">Hostel 5</div></td>
+              <td>76</td>
+              <td><span class="trend trend--down">▼ 4</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ---- PROFILE ---- -->
+    <section class="dash-section" id="profile">
+      <div class="dash-section__head">
+        <h2>Profile</h2>
+      </div>
+      <div class="card">
+        <div class="quick-form" style="gap:14px;">
+          <div class="field">
+            <label>Full name</label>
+            <input type="text" value="Aditi Sharma" disabled>
+          </div>
+          <div class="field-pair">
+            <div class="field">
+              <label>Hostel</label>
+              <input type="text" value="Hostel 4" disabled>
+            </div>
+            <div class="field">
+              <label>Room no.</label>
+              <input type="text" value="214" disabled>
+            </div>
+          </div>
+          <div class="field">
+            <label>School email</label>
+            <input type="text" value="aditi.sharma@hostel.edu" disabled>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+<script>
+(function () {
+  /* ---- Manual / AI Photo method toggle ---- */
+  var tabManual = document.getElementById('method-tab-manual');
+  var tabAI = document.getElementById('method-tab-ai');
+  var panelManual = document.getElementById('method-manual');
+  var panelAI = document.getElementById('method-ai');
+
+  function showManual() {
+    tabManual.classList.add('is-active');
+    tabAI.classList.remove('is-active');
+    tabManual.setAttribute('aria-selected', 'true');
+    tabAI.setAttribute('aria-selected', 'false');
+    panelManual.classList.add('is-active');
+    panelAI.classList.remove('is-active');
+  }
+
+  function showAI() {
+    tabAI.classList.add('is-active');
+    tabManual.classList.remove('is-active');
+    tabAI.setAttribute('aria-selected', 'true');
+    tabManual.setAttribute('aria-selected', 'false');
+    panelAI.classList.add('is-active');
+    panelManual.classList.remove('is-active');
+  }
+
+  tabManual.addEventListener('click', showManual);
+  tabAI.addEventListener('click', showAI);
+
+  /* ---- AI photo upload + mock detection ---- */
+  var photoInput = document.getElementById('photo-input');
+  var uploadZone = document.getElementById('upload-zone');
+  var photoPreview = document.getElementById('photo-preview');
+  var photoPreviewImg = document.getElementById('photo-preview-img');
+  var photoPreviewName = document.getElementById('photo-preview-name');
+  var photoPreviewSize = document.getElementById('photo-preview-size');
+  var photoRemove = document.getElementById('photo-remove');
+  var analyzeBtn = document.getElementById('analyze-btn');
+  var scanStatus = document.getElementById('scan-status');
+  var scanStatusText = document.getElementById('scan-status-text');
+  var detectionResult = document.getElementById('detection-result');
+  var detectedTitle = document.getElementById('detected-title');
+  var detectedConfidence = document.getElementById('detected-confidence');
+  var aiCategory = document.getElementById('ai-category');
+  var aiDescription = document.getElementById('ai-description');
+
+  // NOTE: this is a front-end mock. Wire "runDetection" up to a real
+  // image-recognition endpoint to make this feature actually functional.
+  var MOCK_RESULTS = [
+    { category: 'electrical', title: 'Flickering / faulty light fixture',
+      description: 'The photo shows a light fixture flickering with what looks like exposed wiring near the switch panel — likely a wiring or ballast fault.',
+      urgency: 'high', confidence: 91 },
+    { category: 'plumbing', title: 'Leaking pipe or tap',
+      description: 'Water pooling and corrosion are visible near the pipe fitting in the photo — likely a loose joint or worn washer.',
+      urgency: 'med', confidence: 88 },
+    { category: 'furniture', title: 'Broken chair or desk',
+      description: 'A cracked frame and misaligned joint are visible on the furniture in the photo — it may not be safe to use.',
+      urgency: 'low', confidence: 84 },
+    { category: 'cleanliness', title: 'Overflowing waste bin',
+      description: 'The bin in the photo appears full with waste overflowing onto the floor — flagged for pickup.',
+      urgency: 'med', confidence: 90 },
+    { category: 'wifi', title: 'Router / equipment fault',
+      description: 'The status light pattern on the router in the photo suggests a hardware or connectivity fault.',
+      urgency: 'low', confidence: 78 }
+  ];
+
+  function formatSize(bytes) {
+    if (bytes < 1024) return bytes + ' B';
+    if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(0) + ' KB';
+    return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
+  }
+
+  function resetAIFlow() {
+    photoInput.value = '';
+    uploadZone.style.display = 'flex';
+    photoPreview.style.display = 'none';
+    analyzeBtn.style.display = 'none';
+    scanStatus.style.display = 'none';
+    detectionResult.style.display = 'none';
+  }
+
+  photoInput.addEventListener('change', function () {
+    var file = photoInput.files && photoInput.files[0];
+    if (!file) return;
+
+    var reader = new FileReader();
+    reader.onload = function (e) {
+      photoPreviewImg.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+
+    photoPreviewName.textContent = file.name;
+    photoPreviewSize.textContent = formatSize(file.size);
+
+    uploadZone.style.display = 'none';
+    photoPreview.style.display = 'flex';
+    analyzeBtn.style.display = 'block';
+    detectionResult.style.display = 'none';
+    scanStatus.style.display = 'none';
+  });
+
+  photoRemove.addEventListener('click', function () {
+    resetAIFlow();
+  });
+
+  // drag & drop onto the upload zone
+  ['dragover', 'dragenter'].forEach(function (evt) {
+    uploadZone.addEventListener(evt, function (e) {
+      e.preventDefault();
+      uploadZone.classList.add('is-dragover');
+    });
+  });
+  ['dragleave', 'drop'].forEach(function (evt) {
+    uploadZone.addEventListener(evt, function (e) {
+      e.preventDefault();
+      uploadZone.classList.remove('is-dragover');
+    });
+  });
+  uploadZone.addEventListener('drop', function (e) {
+    var file = e.dataTransfer.files && e.dataTransfer.files[0];
+    if (file) {
+      photoInput.files = e.dataTransfer.files;
+      photoInput.dispatchEvent(new Event('change'));
+    }
+  });
+
+  analyzeBtn.addEventListener('click', function () {
+    analyzeBtn.disabled = true;
+    scanStatus.style.display = 'flex';
+    scanStatusText.textContent = 'Analyzing photo…';
+    detectionResult.style.display = 'none';
+
+    // Simulated analysis delay — swap this timeout for a real API call.
+    setTimeout(function () {
+      var result = MOCK_RESULTS[Math.floor(Math.random() * MOCK_RESULTS.length)];
+
+      scanStatus.style.display = 'none';
+      analyzeBtn.disabled = false;
+      analyzeBtn.style.display = 'none';
+
+      detectedTitle.textContent = result.title;
+      detectedConfidence.textContent = result.confidence + '% match';
+      aiCategory.value = result.category;
+      aiDescription.value = result.description;
+
+      document.getElementById('ai-urgency-low').checked = result.urgency === 'low';
+      document.getElementById('ai-urgency-med').checked = result.urgency === 'med';
+      document.getElementById('ai-urgency-high').checked = result.urgency === 'high';
+
+      detectionResult.style.display = 'block';
+    }, 1400);
+  });
+})();
+</script>
+
+</body>
+</html>
